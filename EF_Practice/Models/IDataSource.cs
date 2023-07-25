@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace EF_Practice.Models;
-
-public interface IDataSource
+namespace EF_Practice.Models
 {
-    public IEnumerable<Record> GetDataSource { get; }
+    public interface IDataSource
+    {
+        public IEnumerable<Record> GetDataSource { get; }
 
-    void Add(Record rec);
+        void Add(Record rec);
+    }
 }

@@ -4,30 +4,31 @@ using System.IO;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
-namespace EF_Practice.Models;
-
-public class DatabaseContext : DbContext, IDataSource
+namespace EF_Practice.Models
 {
-    // ReSharper disable once UnusedAutoPropertyAccessor.Global
-    public DbSet<Record> Records { get; set; }
-
-    public IEnumerable<Record> GetDataSource => Records;
-
-    public void Add(Record rec)
+    public class DatabaseContext : DbContext, IDataSource
     {
-        Records.Add(rec);
-        SaveChanges();
-    }
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
+        public DbSet<Record> Records { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!File.Exists("EFWTest.sqlite"))
+        public IEnumerable<Record> GetDataSource => Records;
+
+        public void Add(Record rec)
         {
-            SQLiteConnection.CreateFile("EFWTest.sqlite"); // ファイルが存在している場合は問答無用で上書き。
+            Records.Add(rec);
+            SaveChanges();
         }
 
-        var connectionString = new SqliteConnectionStringBuilder { DataSource = @"EFWTest.sqlite", }.ToString();
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!File.Exists("EFWTest.sqlite"))
+            {
+                SQLiteConnection.CreateFile("EFWTest.sqlite"); // ファイルが存在している場合は問答無用で上書き。
+            }
 
-        optionsBuilder.UseSqlite(new SQLiteConnection(connectionString));
+            var connectionString = new SqliteConnectionStringBuilder { DataSource = @"EFWTest.sqlite", }.ToString();
+
+            optionsBuilder.UseSqlite(new SQLiteConnection(connectionString));
+        }
     }
 }

@@ -1,14 +1,11 @@
 ﻿using Prism.Mvvm;
 
-namespace EF_Practice.ViewModels;
-
-public class MainWindowViewModel : BindableBase
+namespace EF_Practice.ViewModels
 {
-    private string title = "Prism Application";
-
-    public MainWindowViewModel()
+    public class MainWindowViewModel : BindableBase
     {
-    }
+        private string title = "Prism Application";
 
-    public string Title { get => title; set => SetProperty(ref title, value); }
+        public string Title { get => title; set => SetProperty(ref title, value); }
+    }
 }
