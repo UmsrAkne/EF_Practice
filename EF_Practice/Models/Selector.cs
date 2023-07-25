@@ -1,11 +1,24 @@
-﻿namespace EF_Practice.Models;
+﻿using System.Linq;
 
-public class Selector
+namespace EF_Practice.Models
 {
-    public Selector(IDataSource source)
+    public class Selector
     {
-        DataSource = source;
-    }
+        public Selector(IDataSource source)
+        {
+            DataSource = source;
+        }
 
-    private IDataSource DataSource { get; set; }
+        private IDataSource DataSource { get; }
+
+        public Record GetRecordFromName(string name)
+        {
+            return DataSource.GetDataSource.FirstOrDefault(r => r.Name == name);
+        }
+
+        public void Add(Record rec)
+        {
+            DataSource.Add(rec);
+        }
+    }
 }

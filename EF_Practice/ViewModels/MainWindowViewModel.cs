@@ -1,33 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using EF_Practice.Models;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 
-namespace EF_Practice.ViewModels;
-
-public class MainWindowViewModel : BindableBase
+namespace EF_Practice.ViewModels
 {
-    private string title = "Prism Application";
-
-    public MainWindowViewModel()
+    public class MainWindowViewModel : BindableBase
     {
-        Debug.WriteLine($"{"コンストラクタ"}(MainWindowViewModel : 15)");
-        var context = new DatabaseContext();
-        context.Database.EnsureCreated();
-        context.Add(new Record());
-        M(context.Records);
-    }
+        private string title = "Prism Application";
 
-    public string Title { get => title; set => SetProperty(ref title, value); }
-
-    private void M(IEnumerable<Record> recs)
-    {
-        Debug.WriteLine($"{"execute"}(MainWindowViewModel : 25)");
-        var rs = recs.Where(r => true);
-        foreach (var r in rs)
-        {
-            Debug.WriteLine($"{r.Id}(MainWindowViewModel : 25)");
-        }
+        public string Title { get => title; set => SetProperty(ref title, value); }
     }
 }
